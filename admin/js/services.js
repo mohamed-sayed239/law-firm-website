@@ -23,7 +23,7 @@ import {
 // Configuration
 // ============================================
 
-const ADMIN_UID = "ACccyzUM8YXVhqY1PEAnRo43Wgk2";
+const ADMIN_UID = "eJpkkgoYHhhdQKtTxseVy7DURyE3"; // استبدل هذا بالـ UID الخاص بك من Firebase Auth
 
 // ============================================
 // DOM References
