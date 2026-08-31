@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول | لوحة تحكم مكتب عمرو عبدالحكيم</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/admin.css">
+
+  <style>
+    /* ===== Admin Login Overrides ===== */
+    body {
+      background: var(--color-background);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: var(--spacing-md);
+      margin: 0;
+      font-family: var(--font-main);
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 480px;
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: var(--spacing-xl) var(--spacing-lg);
+      border: 1px solid var(--color-border);
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .login-wrapper:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .login-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .login-logo img {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .login-title {
+      font-size: 1.8rem;
+      font-weight: var(--font-weight-extrabold);
+      color: var(--color-primary);
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+
+    .login-subtitle {
+      font-size: 0.95rem;
+      color: var(--color-muted);
+      margin-top: var(--spacing-xs);
+    }
+
+    .login-divider {
+      height: 2px;
+      width: 60px;
+      background: var(--color-accent);
+      margin: var(--spacing-md) auto var(--spacing-lg);
+      border-radius: 4px;
+    }
+
+    .form-group {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: var(--spacing-xs);
+      font-weight: var(--font-weight-semibold);
+      font-size: 0.95rem;
+      color: var(--color-text);
+    }
+
+    .form-group .input-wrapper {
+      position: relative;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      background: var(--color-background);
+      color: var(--color-text);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      font-family: var(--font-main);
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.15);
+    }
+
+    .form-group .toggle-password {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--color-muted);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color var(--transition-fast);
+    }
+
+    .form-group .toggle-password:hover {
+      color: var(--color-accent);
+    }
+
+    .form-group .toggle-password svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+    }
+
+    .login-error {
+      background: #fde8e8;
+      color: #b91c1c;
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      margin-bottom: var(--spacing-md);
+      display: none;
+      border-right: 3px solid #b91c1c;
+    }
+
+    .login-error.visible {
+      display: block;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--color-primary);
+      color: var(--color-white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 1.05rem;
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      font-family: var(--font-main);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      min-height: 56px;
+    }
+
+    .login-button:hover:not(:disabled) {
+      background: var(--color-accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .login-button:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .login-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .login-button .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: var(--color-white);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .login-button.loading .spinner {
+      display: inline-block;
+    }
+
+    .login-button.loading .btn-text {
+      opacity: 0.8;
+    }
+
+    .login-footer {
+      text-align: center;
+      margin-top: var(--spacing-md);
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+
+    .login-footer a {
+      color: var(--color-accent);
+      font-weight: var(--font-weight-medium);
+    }
+
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 576px) {
+      .login-wrapper {
+        padding: var(--spacing-lg) var(--spacing-md);
+      }
+      .login-title {
+        font-size: 1.5rem;
+      }
+      .login-logo img {
+        height: 44px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-wrapper" role="main" aria-labelledby="login-title">
+    <!-- Header -->
+    <div class="login-header">
+      <div class="login-logo">
+        <img src="../assets/logo/logo.png" alt="مكتب عمرو عبدالحكيم للمحاماة" onerror="this.style.display='none'; this.nextElementSibling?.style?.display='inline';">
+        <span class="login-title" id="login-title">تسجيل الدخول</span>
+      </div>
+      <p class="login-subtitle">لوحة تحكم المكتب</p>
+      <div class="login-divider"></div>
+    </div>
+
+    <!-- Error Message -->
+    <div id="admin-login-error" class="login-error" role="alert" aria-live="polite"></div>
+
+    <!-- Login Form -->
+    <form id="admin-login-form" novalidate>
+      <div class="form-group">
+        <label for="admin-email">البريد الإلكتروني</label>
+        <div class="input-wrapper">
+          <input
+            type="email"
+            id="admin-email"
+            name="email"
+            autocomplete="email"
+            placeholder="amr.abdelhakim.law@gmail.com"
+            required
+            aria-required="true"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="admin-password">كلمة المرور</label>
+        <div class="input-wrapper">
+          <input
+            type="password"
+            id="admin-password"
+            name="password"
+            autocomplete="current-password"
+            placeholder="••••••••"
+            required
+            aria-required="true"
+            minlength="6"
+          >
+          <button
+            type="button"
+            class="toggle-password"
+            aria-label="عرض أو إخفاء كلمة المرور"
+            tabindex="0"
+            id="toggle-password-btn"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        id="admin-login-button"
+        class="login-button"
+        aria-label="تسجيل الدخول"
+      >
+        <span class="spinner"></span>
+        <span class="btn-text">تسجيل الدخول</span>
+      </button>
+    </form>
+
+    <div class="login-footer">
+      <p>الدخول مخصص للإدارة فقط</p>
+    </div>
+  </div>
+
+  <!-- Firebase SDK (Modular) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js",
+        "firebase/auth": "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js",
+        "firebase/firestore": "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js"
+      }
+    }
+  </script>
+  <!-- Login Script -->
+<script type="module" src="js/login.js"></script>
+</body>
+</html>

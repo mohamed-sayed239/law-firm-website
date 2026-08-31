@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>احجز استشارة | مكتب عمرو عبدالحكيم للمحاماة</title>
+  <meta name="description" content="احجز استشارة قانونية مع فريق مكتب عمرو عبدالحكيم للمحاماة. نقدم استشارات قانونية متخصصة في مختلف المجالات.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="احجز استشارة | مكتب عمرو عبدالحكيم للمحاماة">
+  <meta property="og:description" content="احجز استشارة قانونية مع فريق مكتب عمرو عبدالحكيم للمحاماة.">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <style>
+    /* ===== Consultation Page Specific Styles ===== */
+    .consultation-hero {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      padding-block: var(--spacing-2xl);
+      text-align: center;
+    }
+
+    .consultation-hero h1 {
+      color: var(--color-white);
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    .consultation-hero p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .consultation-section {
+      padding-block: var(--spacing-2xl);
+    }
+
+    .consultation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: var(--spacing-xl);
+      align-items: start;
+    }
+
+    .consultation-info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .consultation-info-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary);
+      border-bottom: 2px solid var(--color-accent);
+      padding-bottom: var(--spacing-xs);
+    }
+
+    .consultation-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .consultation-info-item .icon {
+      color: var(--color-accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+      width: 24px;
+      text-align: center;
+    }
+
+    .consultation-info-item .icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+    }
+
+    .consultation-info-item .content {
+      flex: 1;
+    }
+
+    .consultation-info-item .content .label {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text);
+      font-size: 0.9rem;
+      display: block;
+    }
+
+    .consultation-info-item .content .value {
+      color: var(--color-text-light);
+      font-size: 0.95rem;
+      word-break: break-word;
+    }
+
+    .consultation-info-item .content .value a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .consultation-info-item .content .value a:hover {
+      text-decoration: underline;
+    }
+
+    .consultation-form-wrapper {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .consultation-form-wrapper h3 {
+      font-size: 1.3rem;
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary);
+      border-bottom: 2px solid var(--color-accent);
+      padding-bottom: var(--spacing-xs);
+    }
+
+    .consultation-form .form-group {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .consultation-form .form-group label {
+      display: block;
+      margin-bottom: var(--spacing-xs);
+      font-weight: var(--font-weight-semibold);
+      font-size: 0.95rem;
+      color: var(--color-text);
+    }
+
+    .consultation-form .form-group label .required {
+      color: #dc3545;
+      margin-right: 2px;
+    }
+
+    .consultation-form .form-group input,
+    .consultation-form .form-group select,
+    .consultation-form .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-main);
+      font-size: 1rem;
+      background: var(--color-background);
+      color: var(--color-text);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .consultation-form .form-group input:focus,
+    .consultation-form .form-group select:focus,
+    .consultation-form .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.15);
+    }
+
+    .consultation-form .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6b6b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 1rem center;
+      padding-left: 2.5rem;
+    }
+
+    .consultation-form .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .consultation-form .form-status {
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--spacing-md);
+      display: none;
+      font-size: 0.95rem;
+    }
+
+    .consultation-form .form-status.visible {
+      display: block;
+    }
+
+    .consultation-form .form-status.success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    .consultation-form .form-status.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .consultation-form .submit-btn {
+      width: 100%;
+      padding: 0.9rem;
+      font-size: 1.05rem;
+      font-weight: var(--font-weight-semibold);
+      background: var(--color-primary);
+      color: var(--color-white);
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      font-family: var(--font-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      min-height: 56px;
+    }
+
+    .consultation-form .submit-btn:hover:not(:disabled) {
+      background: var(--color-accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .consultation-form .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .consultation-form .submit-btn .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: var(--color-white);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .consultation-form .submit-btn.loading .spinner {
+      display: inline-block;
+    }
+
+    .consultation-form .submit-btn.loading .btn-text {
+      opacity: 0.8;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 992px) {
+      .consultation-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .consultation-section {
+        padding-block: var(--spacing-lg);
+      }
+      .consultation-info-card,
+      .consultation-form-wrapper {
+        padding: var(--spacing-md);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== Navbar ========== -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/logo/logo.png" alt="مكتب عمرو عبدالحكيم للمحاماة" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+      </a>
+      
+      <nav>
+        <ul class="navbar-links">
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="about.html">عن المكتب</a></li>
+          <li><a href="services.html">الخدمات</a></li>
+          <li><a href="lawyers.html">فريق العمل</a></li>
+          <li><a href="articles.html">المقالات</a></li>
+          <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
+      </nav>
+      
+      <div class="navbar-actions">
+        <a href="consultation.html" class="btn btn-accent">احجز استشارة</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== Bottom Navigation (Mobile) ========== -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="التنقل السفلي">
+    <ul>
+      <li>
+        <a href="index.html">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M9 22V12h6v10"/></svg>
+          <span>الرئيسية</span>
+        </a>
+      </li>
+      <li>
+        <a href="services.html">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9 16 14 18 22 12 17 6 22 8 14 2 9 9 9"/></svg>
+          <span>الخدمات</span>
+        </a>
+      </li>
+      <li>
+        <a href="lawyers.html">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>الفريق</span>
+        </a>
+      </li>
+      <li>
+        <a href="articles.html">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>المقالات</span>
+        </a>
+      </li>
+      <li>
+        <a href="contact.html">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>تواصل</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ========== Main ========== -->
+  <main>
+    <!-- Hero -->
+    <section class="consultation-hero">
+      <div class="container">
+        <h1>احجز استشارتك القانونية</h1>
+        <p>أرسل بياناتك وسنتواصل معك لتحديد الخطوة المناسبة وحجز موعد استشارتك.</p>
+      </div>
+    </section>
+
+    <!-- Consultation Section -->
+    <section class="consultation-section">
+      <div class="container">
+        <div class="consultation-grid">
+          <!-- Info Card -->
+          <div class="consultation-info-card">
+            <h3>بيانات المكتب</h3>
+
+            <div class="consultation-info-item" id="consultation-office-name-container">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 13.5A9 9 0 0 1 3 13.5M21 13.5V11M21 13.5V21"/><path d="M3 13.5V11M3 13.5V21"/><path d="M12 3v10"/><path d="M8 7h8"/><path d="M7 11h10"/></svg>
+              </div>
+              <div class="content">
+                <span class="label">اسم المكتب</span>
+                <span class="value" id="consultation-office-name">—</span>
+              </div>
+            </div>
+
+            <div class="consultation-info-item" id="consultation-office-phone-container">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="content">
+                <span class="label">الهاتف</span>
+                <span class="value" id="consultation-office-phone"><a href="#" id="consultation-phone-link">—</a></span>
+              </div>
+            </div>
+
+            <div class="consultation-info-item" id="consultation-office-whatsapp-container">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </div>
+              <div class="content">
+                <span class="label">واتساب</span>
+                <span class="value" id="consultation-office-whatsapp"><a href="#" target="_blank" rel="noopener noreferrer" id="consultation-whatsapp-link">—</a></span>
+              </div>
+            </div>
+
+            <div class="consultation-info-item" id="consultation-office-email-container">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="content">
+                <span class="label">البريد الإلكتروني</span>
+                <span class="value" id="consultation-office-email"><a href="#" id="consultation-email-link">—</a></span>
+              </div>
+            </div>
+
+            <div class="consultation-info-item" id="consultation-office-address-container">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="content">
+                <span class="label">العنوان</span>
+                <span class="value" id="consultation-office-address">—</span>
+              </div>
+            </div>
+
+            <div class="consultation-info-item" id="consultation-office-working-hours-container">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div class="content">
+                <span class="label">ساعات العمل</span>
+                <span class="value" id="consultation-office-working-hours">—</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <div class="consultation-form-wrapper">
+            <h3>طلب استشارة</h3>
+            <form id="consultation-form" class="consultation-form" novalidate>
+              <div id="consultation-form-status" class="form-status"></div>
+
+              <div class="form-group">
+                <label for="consultation-name">الاسم الكامل <span class="required">*</span></label>
+                <input type="text" id="consultation-name" name="name" placeholder="اسمك الكامل" autocomplete="name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="consultation-phone">رقم الهاتف <span class="required">*</span></label>
+                <input type="tel" id="consultation-phone" name="phone" placeholder="رقم الهاتف" autocomplete="tel" required>
+              </div>
+
+              <div class="form-group">
+                <label for="consultation-email">البريد الإلكتروني</label>
+                <input type="email" id="consultation-email" name="email" placeholder="بريدك الإلكتروني" autocomplete="email">
+              </div>
+
+              <div class="form-group">
+                <label for="consultation-service">الخدمة المطلوبة <span class="required">*</span></label>
+                <select id="consultation-service" required>
+                  <option value="">اختر الخدمة...</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="consultation-date">التاريخ المفضل</label>
+                <input type="date" id="consultation-date" name="preferredDate">
+              </div>
+
+              <div class="form-group">
+                <label for="consultation-message">ملاحظات إضافية</label>
+                <textarea id="consultation-message" name="message" rows="4" placeholder="أي تفاصيل إضافية ترغب في إضافتها"></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn" id="consultation-submit">
+                <span class="spinner"></span>
+                <span class="btn-text">احجز الاستشارة</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== Footer ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 id="footer-office-name">مكتب عمرو عبدالحكيم للمحاماة</h4>
+          <p>نقدم خدمات قانونية متكاملة بحرفية عالية والتزام كامل بأخلاقيات المهنة.</p>
+        </div>
+        <div class="footer-col">
+          <h4>روابط سريعة</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="about.html">عن المكتب</a></li>
+            <li><a href="services.html">الخدمات</a></li>
+            <li><a href="lawyers.html">فريق العمل</a></li>
+            <li><a href="articles.html">المقالات</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>خدماتنا</h4>
+          <ul class="footer-links">
+            <li><a href="services.html">قانون الشركات</a></li>
+            <li><a href="services.html">القضايا المدنية</a></li>
+            <li><a href="services.html">القانون الجنائي</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>معلومات التواصل</h4>
+          <ul class="footer-links">
+            <li>الهاتف: <a href="tel:+201000000000" id="footer-phone">[رقم الهاتف]</a></li>
+            <li>واتساب: <a href="https://wa.me/201000000000" target="_blank" rel="noopener" id="footer-whatsapp">[واتساب]</a></li>
+            <li>البريد: <a href="mailto:info@example.com" id="footer-email">[البريد الإلكتروني]</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 مكتب عمرو عبدالحكيم للمحاماة. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/consultation.js"></script>
+</body>
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إدارة الخدمات | مكتب عمرو عبدالحكيم</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/admin.css">
+
+  <style>
+    /* ===== Admin Services Page Styles ===== */
+    body {
+      display: flex;
+      background: var(--color-background);
+      font-family: var(--font-main);
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    /* Sidebar (مستعار من index.html) */
+    .admin-sidebar {
+      width: 260px;
+      background: var(--color-primary);
+      color: var(--color-white);
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      padding: var(--spacing-lg) var(--spacing-md);
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      flex-shrink: 0;
+      overflow-y: auto;
+      transition: transform var(--transition-base);
+      z-index: 100;
+    }
+
+    .admin-sidebar .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-xl);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .admin-sidebar .sidebar-brand img {
+      height: 40px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+
+    .admin-sidebar .sidebar-brand span {
+      font-size: 1.2rem;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-white);
+    }
+
+    .admin-sidebar .sidebar-nav {
+      flex: 1;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .admin-sidebar .sidebar-nav li {
+      margin-bottom: 4px;
+    }
+
+    .admin-sidebar .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding: 0.7rem 1rem;
+      border-radius: var(--radius-sm);
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: var(--font-weight-medium);
+      transition: all var(--transition-fast);
+      font-size: 0.95rem;
+    }
+
+    .admin-sidebar .sidebar-nav a:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--color-white);
+    }
+
+    .admin-sidebar .sidebar-nav a.active {
+      background: var(--color-accent);
+      color: var(--color-white);
+      box-shadow: 0 2px 8px rgba(176, 141, 87, 0.2);
+    }
+
+    .admin-sidebar .sidebar-nav a svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    .admin-sidebar .sidebar-logout {
+      margin-top: auto;
+      padding-top: var(--spacing-md);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .admin-sidebar .sidebar-logout button {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      font-weight: var(--font-weight-medium);
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      justify-content: center;
+    }
+
+    .admin-sidebar .sidebar-logout button:hover {
+      background: #dc3545;
+      border-color: #dc3545;
+      color: var(--color-white);
+    }
+
+    /* Main Content */
+    .admin-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .admin-topbar {
+      background: var(--color-surface);
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .admin-topbar .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .admin-topbar .topbar-left h1 {
+      font-size: 1.4rem;
+      margin: 0;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary);
+    }
+
+    .admin-topbar .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+
+    .admin-topbar .topbar-right .user-email {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+    }
+
+    .admin-topbar .topbar-right .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--color-primary);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .admin-topbar .topbar-right .mobile-toggle svg {
+      width: 28px;
+      height: 28px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+    }
+
+    /* Page Content */
+    .page-content {
+      padding: var(--spacing-lg);
+      flex: 1;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .page-header h2 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary);
+    }
+
+    .page-header .page-actions {
+      display: flex;
+      gap: var(--spacing-sm);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .page-header .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 0.3rem 0.8rem;
+      transition: border-color var(--transition-fast);
+    }
+
+    .page-header .search-box:focus-within {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.15);
+    }
+
+    .page-header .search-box input {
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 0.4rem 0.4rem 0.4rem 0;
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      width: 180px;
+      color: var(--color-text);
+    }
+
+    .page-header .search-box input::placeholder {
+      color: var(--color-muted);
+    }
+
+    .page-header .search-box svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--color-muted);
+      stroke-width: 1.8;
+    }
+
+    .btn-add {
+      background: var(--color-accent);
+      color: var(--color-white);
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-main);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-add:hover {
+      background: var(--color-accent-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Services Table */
+    .table-wrapper {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .services-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .services-table th {
+      text-align: right;
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--color-background);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text);
+      border-bottom: 2px solid var(--color-border);
+      white-space: nowrap;
+    }
+
+    .services-table td {
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: middle;
+    }
+
+    .services-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .services-table .status-badge {
+      display: inline-block;
+      padding: 0.15rem 0.7rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .status-badge.published {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .status-badge.unpublished {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .services-table .actions {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .services-table .actions button {
+      background: none;
+      border: none;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: var(--font-main);
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .services-table .actions .btn-edit {
+      color: var(--color-accent);
+    }
+    .services-table .actions .btn-edit:hover {
+      background: rgba(176, 141, 87, 0.1);
+    }
+
+    .services-table .actions .btn-toggle {
+      color: var(--color-primary);
+    }
+    .services-table .actions .btn-toggle:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .services-table .actions .btn-delete {
+      color: #dc3545;
+    }
+    .services-table .actions .btn-delete:hover {
+      background: rgba(220, 53, 69, 0.1);
+    }
+
+    /* Mobile card view */
+    .services-cards {
+      display: none;
+      gap: var(--spacing-md);
+      flex-direction: column;
+    }
+
+    .service-card-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .service-card-item .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .service-card-item .card-title {
+      font-weight: var(--font-weight-bold);
+      font-size: 1.1rem;
+      color: var(--color-primary);
+    }
+
+    .service-card-item .card-desc {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+      margin: var(--spacing-xs) 0;
+    }
+
+    .service-card-item .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: var(--spacing-sm);
+      flex-wrap: wrap;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-md);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      max-width: 500px;
+      width: 100%;
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-xl);
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: fadeUp 0.3s ease-out;
+    }
+
+    .modal-box h3 {
+      margin-top: 0;
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary);
+      font-size: 1.3rem;
+    }
+
+    .modal-box .form-group {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .modal-box .form-group label {
+      display: block;
+      margin-bottom: var(--spacing-xs);
+      font-weight: var(--font-weight-semibold);
+      font-size: 0.95rem;
+      color: var(--color-text);
+    }
+
+    .modal-box .form-group input,
+    .modal-box .form-group textarea,
+    .modal-box .form-group select {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-main);
+      font-size: 1rem;
+      background: var(--color-background);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .modal-box .form-group input:focus,
+    .modal-box .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.15);
+    }
+
+    .modal-box .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .modal-box .form-group .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .modal-box .form-group .checkbox-group input[type="checkbox"] {
+      width: auto;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .modal-box .modal-actions {
+      display: flex;
+      gap: var(--spacing-sm);
+      justify-content: flex-end;
+      margin-top: var(--spacing-lg);
+    }
+
+    .modal-box .modal-actions button {
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-main);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .modal-box .modal-actions .btn-cancel {
+      background: var(--color-border);
+      color: var(--color-text);
+    }
+    .modal-box .modal-actions .btn-cancel:hover {
+      background: #d1d5db;
+    }
+
+    .modal-box .modal-actions .btn-save {
+      background: var(--color-accent);
+      color: var(--color-white);
+    }
+    .modal-box .modal-actions .btn-save:hover {
+      background: var(--color-accent-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .modal-box .modal-actions .btn-save:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 992px) {
+      .admin-sidebar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        transform: translateX(100%);
+        box-shadow: var(--shadow-xl);
+        width: 280px;
+        z-index: 100;
+      }
+
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+
+      .mobile-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 90;
+        opacity: 0;
+        transition: opacity var(--transition-base);
+      }
+
+      .mobile-backdrop.open {
+        display: block;
+        opacity: 1;
+      }
+
+      .admin-topbar .topbar-right .mobile-toggle {
+        display: block;
+      }
+
+      .services-table {
+        display: none;
+      }
+      .services-cards {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .page-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .page-header .page-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .page-header .search-box input {
+        width: 100%;
+      }
+      .admin-topbar .topbar-right .user-email {
+        display: none;
+      }
+      .modal-box {
+        padding: var(--spacing-md);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Mobile Backdrop -->
+  <div class="mobile-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="adminSidebar" aria-label="القائمة الجانبية">
+    <div class="sidebar-brand">
+      <img src="../assets/logo/logo.png" alt="مكتب عمرو عبدالحكيم" onerror="this.style.display='none'; this.nextElementSibling?.style?.display='inline';">
+      <span>المكتب</span>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="index.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12l9-9 9 9"/><path d="M9 22V12h6v10"/></svg>
+            لوحة التحكم
+          </a>
+        </li>
+        <li>
+          <a href="services.html" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/><path d="M9 4v16"/></svg>
+            الخدمات
+          </a>
+        </li>
+        <li>
+          <a href="lawyers.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            فريق العمل
+          </a>
+        </li>
+        <li>
+          <a href="articles.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            المقالات
+          </a>
+        </li>
+        <li>
+          <a href="messages.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            الرسائل
+          </a>
+        </li>
+        <li>
+          <a href="consultations.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            الاستشارات
+          </a>
+        </li>
+        <li>
+          <a href="settings.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M12 1v2"/><path d="M12 21v2"/><path d="M4.22 4.22l1.42 1.42"/><path d="M18.36 18.36l1.42 1.42"/><path d="M1 12h2"/><path d="M21 12h2"/><path d="M4.22 19.78l1.42-1.42"/><path d="M18.36 5.64l1.42-1.42"/></svg>
+            الإعدادات
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-logout">
+      <button id="logoutButton" aria-label="تسجيل الخروج">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        تسجيل الخروج
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <h1>إدارة الخدمات</h1>
+      </div>
+      <div class="topbar-right">
+        <span class="user-email" id="adminUserEmail">loading...</span>
+        <button class="mobile-toggle" id="sidebarToggle" aria-label="فتح القائمة الجانبية">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+      <div class="page-header">
+        <h2>جميع الخدمات</h2>
+        <div class="page-actions">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="servicesSearch" placeholder="ابحث في الخدمات...">
+          </div>
+          <button class="btn-add" id="addServiceBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            إضافة خدمة
+          </button>
+        </div>
+      </div>
+
+      <!-- Table (Desktop) -->
+      <div class="table-wrapper">
+        <table class="services-table" id="servicesTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>العنوان</th>
+              <th>الوصف</th>
+              <th>الحالة</th>
+              <th>الإجراءات</th>
+            </tr>
+          </thead>
+          <tbody id="servicesTableBody">
+            <tr><td colspan="5" style="text-align:center; color:var(--color-muted);">جاري تحميل الخدمات...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Cards (Mobile) -->
+      <div class="services-cards" id="servicesCards">
+        <div class="empty-state-small">جاري تحميل الخدمات...</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal for Add/Edit -->
+  <div class="modal-overlay" id="serviceModal">
+    <div class="modal-box">
+      <h3 id="modalTitle">إضافة خدمة جديدة</h3>
+      <form id="serviceForm" novalidate>
+        <input type="hidden" id="serviceId" value="">
+
+        <div class="form-group">
+          <label for="serviceTitle">العنوان <span style="color:red;">*</span></label>
+          <input type="text" id="serviceTitle" placeholder="مثال: استشارات قانونية" required>
+        </div>
+
+        <div class="form-group">
+          <label for="serviceDescription">الوصف</label>
+          <textarea id="serviceDescription" placeholder="وصف الخدمة (اختياري)"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="serviceIcon">الأيقونة (اختياري)</label>
+          <input type="text" id="serviceIcon" placeholder="رمز الأيقونة (اختياري)">
+        </div>
+
+        <div class="form-group">
+          <div class="checkbox-group">
+            <input type="checkbox" id="servicePublished" checked>
+            <label for="servicePublished">منشورة</label>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" id="cancelModal">إلغاء</button>
+          <button type="submit" class="btn-save" id="saveServiceBtn">حفظ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal-box" style="max-width:400px;">
+      <h3>تأكيد الحذف</h3>
+      <p>هل أنت متأكد من حذف هذه الخدمة؟</p>
+      <p style="color:var(--color-muted); font-size:0.9rem;">لا يمكن التراجع عن هذا الإجراء.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" id="cancelDelete">إلغاء</button>
+        <button type="button" class="btn-save" id="confirmDeleteBtn" style="background:#dc3545;">حذف</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js",
+        "firebase/auth": "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js",
+        "firebase/firestore": "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js"
+      }
+    }
+  </script>
+
+  <script type="module" src="js/services.js"></script>
+</body>
+</html>

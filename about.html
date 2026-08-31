@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عن المكتب | مكتب عمرو عبدالحكيم للمحاماة</title>
+  <meta name="description" content="تعرف على مكتب عمرو عبدالحكيم للمحاماة، خبرة قانونية مبنية على الفهم الدقيق والدراسة المتعمقة لكل قضية.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="عن المكتب | مكتب عمرو عبدالحكيم للمحاماة">
+  <meta property="og:description" content="تعرف على مكتب عمرو عبدالحكيم للمحاماة، خبرة قانونية مبنية على الفهم الدقيق والدراسة المتعمقة لكل قضية.">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <style>
+    /* ===== About Page Specific Styles ===== */
+    .about-hero {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      padding-block: var(--spacing-2xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(201, 169, 110, 0.06), transparent 60%);
+      pointer-events: none;
+    }
+
+    .about-hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-hero h1 {
+      color: var(--color-white);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .about-hero .hero-subtitle {
+      color: var(--color-accent);
+      font-size: 1.2rem;
+      font-weight: var(--font-weight-medium);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .about-hero p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin: 0 auto var(--spacing-lg);
+      line-height: 1.8;
+    }
+
+    .about-hero .hero-buttons {
+      display: flex;
+      gap: var(--spacing-sm);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .about-hero .hero-buttons .btn {
+      min-width: 160px;
+    }
+
+    /* About Sections */
+    .about-section {
+      padding-block: var(--spacing-2xl);
+    }
+
+    .about-section:nth-child(even) {
+      background: var(--color-background);
+    }
+
+    .about-section .section-header {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .about-section .section-header h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+
+    .about-content {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-content p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--color-text-light);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .about-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Values Grid */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .value-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg) var(--spacing-md);
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+
+    .value-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-accent);
+    }
+
+    .value-item .value-icon {
+      color: var(--color-accent);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .value-item .value-icon svg {
+      width: 36px;
+      height: 36px;
+      stroke: currentColor;
+      stroke-width: 1.6;
+    }
+
+    .value-item h4 {
+      font-size: 1.05rem;
+      margin-bottom: var(--spacing-xs);
+      color: var(--color-primary);
+    }
+
+    .value-item p {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      margin: 0;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-lg);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: var(--spacing-md);
+    }
+
+    .stat-item .stat-number {
+      font-size: 2.8rem;
+      font-weight: var(--font-weight-extrabold);
+      color: var(--color-accent);
+      display: block;
+    }
+
+    .stat-item .stat-label {
+      font-size: 1rem;
+      color: var(--color-muted);
+      font-weight: var(--font-weight-medium);
+    }
+
+    /* Lawyers */
+    .lawyers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-md);
+    }
+
+    .lawyer-card-about {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+
+    .lawyer-card-about:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-accent);
+    }
+
+    .lawyer-card-about .lawyer-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .lawyer-card-about .lawyer-image-fallback {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-background);
+      color: var(--color-muted);
+      font-size: 4rem;
+      font-weight: var(--font-weight-bold);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .lawyer-card-about .lawyer-info {
+      padding: var(--spacing-md);
+    }
+
+    .lawyer-card-about .lawyer-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+      color: var(--color-primary);
+    }
+
+    .lawyer-card-about .lawyer-info .lawyer-role {
+      color: var(--color-accent);
+      font-weight: var(--font-weight-semibold);
+      font-size: 0.9rem;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .lawyer-card-about .lawyer-info .lawyer-bio {
+      font-size: 0.95rem;
+      color: var(--color-text-light);
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* CTA Section */
+    .about-cta {
+      background: var(--color-primary);
+      text-align: center;
+      padding-block: var(--spacing-2xl);
+    }
+
+    .about-cta h2 {
+      color: var(--color-white);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .about-cta p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.05rem;
+      max-width: 600px;
+      margin: 0 auto var(--spacing-lg);
+    }
+
+    .about-cta .cta-buttons {
+      display: flex;
+      gap: var(--spacing-sm);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Mobile */
+    @media (max-width: 992px) {
+      .about-hero {
+        padding-block: var(--spacing-xl);
+      }
+      .about-section {
+        padding-block: var(--spacing-xl);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .about-hero {
+        padding-block: var(--spacing-lg);
+      }
+      .about-hero .hero-buttons .btn {
+        min-width: 140px;
+        width: 100%;
+      }
+      .values-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .about-cta .cta-buttons .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== Navbar ========== -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/logo/logo.png" alt="مكتب عمرو عبدالحكيم للمحاماة" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+      </a>
+      
+      <nav>
+        <ul class="navbar-links">
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="about.html" class="active">عن المكتب</a></li>
+          <li><a href="services.html">الخدمات</a></li>
+          <li><a href="lawyers.html">فريق العمل</a></li>
+          <li><a href="articles.html">المقالات</a></li>
+          <li><a href="contact.html">تواصل معنا</a></li>
+        </ul>
+      </nav>
+      
+      <div class="navbar-actions">
+        <a href="consultation.html" class="btn btn-accent">احجز استشارة</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== Bottom Navigation (Mobile) ========== -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="التنقل السفلي">
+    <ul>
+      <li>
+        <a href="index.html">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M9 22V12h6v10"/></svg>
+          <span>الرئيسية</span>
+        </a>
+      </li>
+      <li>
+        <a href="services.html">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9 16 14 18 22 12 17 6 22 8 14 2 9 9 9"/></svg>
+          <span>الخدمات</span>
+        </a>
+      </li>
+      <li>
+        <a href="lawyers.html">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>الفريق</span>
+        </a>
+      </li>
+      <li>
+        <a href="articles.html">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>المقالات</span>
+        </a>
+      </li>
+      <li>
+        <a href="contact.html">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>تواصل</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ========== Main ========== -->
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section class="about-hero">
+      <div class="container">
+        <h1>عن المكتب</h1>
+        <p class="hero-subtitle">خبرة قانونية تقوم على الفهم والدراسة الدقيقة</p>
+        <p>نؤمن بأن كل قضية تستحق اهتماماً خاصاً وفهماً عميقاً لطبيعتها، ونعمل مع عملائنا كشركاء في بناء الحلول القانونية المناسبة.</p>
+        <div class="hero-buttons">
+          <a href="consultation.html" class="btn btn-accent">احجز استشارة</a>
+          <a href="contact.html" class="btn btn-light">تواصل معنا</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About Section ===== -->
+    <section class="about-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-subtitle">من نحن</p>
+          <h2 class="section-title">مكتب عمرو عبدالحكيم للمحاماة</h2>
+        </div>
+        <div class="about-content">
+          <p>
+            مكتب عمرو عبدالحكيم للمحاماة هو مكتب قانوني متخصص يقدم استشارات وحلولاً قانونية مدروسة بعناية،
+            مبنية على فهم دقيق لطبيعة كل قضية واحتياجات كل عميل.
+          </p>
+          <p>
+            نؤمن بأن العمل القانوني الناجح يبدأ بالاستماع الجيد، ثم دراسة الموقف القانوني من جميع جوانبه،
+            ثم بناء استراتيجية واضحة ومحكمة تهدف إلى تحقيق أفضل النتائج الممكنة.
+          </p>
+          <p>
+            نلتزم بأعلى معايير المهنة وأخلاقياتها، ونضع مصلحة العميل في صميم اهتمامنا،
+            مع الحفاظ على الشفافية الكاملة والتواصل المستمر طوال فترة التعامل.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Values ===== -->
+    <section class="about-section" style="background: var(--color-background);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-subtitle">قيمنا</p>
+          <h2 class="section-title">ما نمثل به</h2>
+          <p class="section-description">مبادئ نعمل بها في كل قضية وكل تعامل.</p>
+        </div>
+        <div class="values-grid">
+          <div class="value-item">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <h4>المهنية</h4>
+            <p>نلتزم بأعلى مستويات الاحترافية في تقديم الخدمات القانونية.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/><path d="M12 8v4l2 2"/></svg>
+            </div>
+            <h4>الشفافية</h4>
+            <p>نحرص على إبقاء العميل على علم بكل تطور في قضيته.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h4>الدقة</h4>
+            <p>ندرس كل تفاصيل القضية بعناية فائقة لنبني استراتيجية متينة.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <h4>السرية</h4>
+            <p>نحافظ على سرية معلومات العملاء ونلتزم بأعلى معايير الأمان.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v4M12 22v-4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M22 12h-4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            </div>
+            <h4>الالتزام</h4>
+            <p>نلتزم بقواعد المهنة وأخلاقياتها في كل ما نقدمه من خدمات.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Experience / Stats ===== -->
+    <section class="about-section" id="about-stats-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-subtitle">خبرتنا</p>
+          <h2 class="section-title">في الأرقام</h2>
+          <p class="section-description">حصيلة سنوات من العمل القانوني المتخصص.</p>
+        </div>
+        <div class="stats-grid" id="about-stats-container">
+          <div class="stat-item">
+            <span class="stat-number" id="about-experience-years">—</span>
+            <span class="stat-label">سنوات خبرة</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="about-cases-count">—</span>
+            <span class="stat-label">قضية موكلة</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Lawyers ===== -->
+    <section class="about-section" style="background: var(--color-background);" id="about-lawyers-section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-subtitle">فريقنا</p>
+          <h2 class="section-title">من نقود العمل معكم</h2>
+          <p class="section-description">نخبة من المحامين ذوي الخبرة والكفاءة.</p>
+        </div>
+        <div class="lawyers-grid" id="about-lawyers-container">
+          <!-- يتم ملؤها بواسطة JavaScript -->
+          <div style="text-align:center; grid-column:1/-1; color:var(--color-muted); padding:var(--spacing-lg);">
+            جاري تحميل فريق العمل...
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="about-cta">
+      <div class="container">
+        <h2>هل تحتاج إلى استشارة قانونية؟</h2>
+        <p>نحن هنا لمساعدتك. احجز استشارتك اليوم وتواصل مع فريقنا المتخصص.</p>
+        <div class="cta-buttons">
+          <a href="consultation.html" class="btn btn-accent">احجز استشارة</a>
+          <a href="contact.html" class="btn btn-light">تواصل معنا</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== Footer ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 id="footer-office-name">مكتب عمرو عبدالحكيم للمحاماة</h4>
+          <p>نقدم خدمات قانونية متكاملة بحرفية عالية والتزام كامل بأخلاقيات المهنة.</p>
+        </div>
+        <div class="footer-col">
+          <h4>روابط سريعة</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="about.html">عن المكتب</a></li>
+            <li><a href="services.html">الخدمات</a></li>
+            <li><a href="lawyers.html">فريق العمل</a></li>
+            <li><a href="articles.html">المقالات</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>خدماتنا</h4>
+          <ul class="footer-links">
+            <li><a href="services.html">قانون الشركات</a></li>
+            <li><a href="services.html">القضايا المدنية</a></li>
+            <li><a href="services.html">القانون الجنائي</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>معلومات التواصل</h4>
+          <ul class="footer-links">
+            <li>الهاتف: <a href="tel:+201000000000" id="footer-phone">[رقم الهاتف]</a></li>
+            <li>واتساب: <a href="https://wa.me/201000000000" target="_blank" rel="noopener" id="footer-whatsapp">[واتساب]</a></li>
+            <li>البريد: <a href="mailto:info@example.com" id="footer-email">[البريد الإلكتروني]</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 مكتب عمرو عبدالحكيم للمحاماة. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js",
+        "firebase/auth": "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js",
+        "firebase/firestore": "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js"
+      }
+    }
+  </script>
+
+  <!-- Main.js for global behavior (navbar, scroll, reveal) -->
+  <script type="module" src="js/main.js"></script>
+
+  <!-- About page specific -->
+  <script type="module" src="js/about.js"></script>
+</body>
+</html>

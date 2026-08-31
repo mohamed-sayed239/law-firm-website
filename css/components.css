@@ -1,0 +1,430 @@
+/* ============================================
+   components.css - المكونات العامة القابلة لإعادة الاستخدام (نسخة محسّنة)
+   Luxury Law Firm - Premium UI
+============================================ */
+
+/* ---------- Navbar (Desktop) محسّنة ---------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  /* خلفية ثابتة شبه شفافة داكنة مع تأثير زجاجي */
+  background-color: rgba(10, 26, 47, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  padding-block: 0.75rem;
+  transition: box-shadow var(--transition-base), padding var(--transition-base);
+}
+
+/* عند التمرير نكتفي بتغيير الظل أو الحجم (اختياري) */
+.navbar.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding-block: 0.4rem;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  text-decoration: none;
+  color: var(--color-white);
+  transition: transform var(--transition-fast);
+}
+
+.navbar-logo:hover {
+  transform: scale(1.02);
+}
+
+.navbar-logo img {
+  height: 50px;
+  width: auto;
+  /* إزالة الفلتر حتى يظهر اللوجو بلونه الطبيعي */
+  transition: transform var(--transition-fast);
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  letter-spacing: -0.5px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: var(--spacing-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links a {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: var(--font-weight-medium);
+  padding-block: var(--spacing-xs);
+  position: relative;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2.5px;
+  background-color: var(--color-accent);
+  transition: width var(--transition-base), background-color var(--transition-fast);
+  border-radius: 4px;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: var(--color-white);
+  opacity: 1;
+}
+
+.navbar-links a:hover::after,
+.navbar-links a.active::after {
+  width: 100%;
+  background-color: var(--color-accent);
+}
+
+.navbar-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.navbar-actions .btn {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border-color: var(--color-accent);
+  padding: 0.5rem 1.8rem;
+  font-size: 0.9rem;
+}
+
+.navbar-actions .btn:hover {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ---------- Bottom Navigation (Mobile) محسّنة ---------- */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: var(--spacing-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2 * var(--spacing-md));
+  max-width: 420px;
+  background-color: rgba(10, 26, 47, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--radius-xl);
+  padding: 0.3rem 0.5rem;
+  z-index: 1000;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-bottom-nav ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-bottom-nav li {
+  flex: 1;
+  text-align: center;
+}
+
+.mobile-bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.7rem;
+  font-weight: var(--font-weight-medium);
+  padding: 0.4rem 0;
+  border-radius: var(--radius-md);
+  transition: color var(--transition-fast), background-color var(--transition-fast),
+    transform var(--transition-fast);
+  text-decoration: none;
+  position: relative;
+}
+
+.mobile-bottom-nav a svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.8;
+  transition: transform var(--transition-fast);
+}
+
+.mobile-bottom-nav a.active,
+.mobile-bottom-nav a:hover {
+  color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.mobile-bottom-nav a.active svg,
+.mobile-bottom-nav a:hover svg {
+  transform: translateY(-2px);
+}
+
+.mobile-bottom-nav a.active::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background-color: var(--color-accent);
+  border-radius: 4px;
+}
+
+/* Hide desktop hamburger button */
+.mobile-menu-toggle {
+  display: none;
+}
+
+/* Mobile Menu (old) hidden by default */
+.mobile-menu {
+  display: none;
+}
+
+/* ---------- Responsive: إظهار القاع وإخفاء الروابط الديسكتوب ---------- */
+@media (max-width: 992px) {
+  .navbar-links {
+    display: none;
+  }
+  .navbar-actions .btn {
+    display: none;
+  }
+  .mobile-bottom-nav {
+    display: block;
+  }
+  .navbar-logo img {
+    height: 40px;
+  }
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  .navbar-container {
+    height: 60px;
+  }
+}
+
+/* شاشات صغيرة جداً */
+@media (max-width: 400px) {
+  .mobile-bottom-nav {
+    bottom: var(--spacing-xs);
+    width: calc(100% - 2 * var(--spacing-sm));
+    padding: 0.2rem 0.3rem;
+    border-radius: var(--radius-lg);
+  }
+  .mobile-bottom-nav a {
+    font-size: 0.6rem;
+    padding: 0.3rem 0;
+  }
+  .mobile-bottom-nav a svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* ---------- إضافة بعض المكونات الإضافية (مثل Dropdown) ---------- */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 200px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-sm) 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all var(--transition-base);
+  z-index: 100;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.5rem 1.2rem;
+  color: var(--color-text);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.dropdown-menu a:hover {
+  background-color: rgba(201, 169, 110, 0.08);
+  color: var(--color-accent);
+}
+
+/* ---------- Badge / شارة ---------- */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  border-radius: 40px;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.badge-outline {
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ---------- Divider مزخرف ---------- */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-lg) 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to left, var(--color-border), transparent);
+}
+
+.divider::after {
+  background: linear-gradient(to right, var(--color-border), transparent);
+}
+
+.divider-icon {
+  color: var(--color-accent);
+  font-size: 1.2rem;
+}
+
+/* ---------- Scroll to top ---------- */
+.scroll-top {
+  position: fixed;
+  bottom: var(--spacing-lg);
+  right: var(--spacing-lg);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border: none;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  z-index: 999;
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top:hover {
+  background-color: var(--color-accent-dark);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.scroll-top svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 2;
+}
+
+/* ---------- Tooltip ---------- */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-fast);
+  pointer-events: none;
+}
+
+.tooltip:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
+}
+
+/* ---------- Skeleton Loading ---------- */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-border) 25%, #e9e5de 50%, var(--color-border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
