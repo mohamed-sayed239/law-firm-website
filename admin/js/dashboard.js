@@ -22,7 +22,7 @@ import {
 // Configuration
 // ============================================
 
-const ADMIN_UID = "ACccyzUM8YXVhqY1PEAnRo43Wgk2";
+const ADMIN_UID = "lR3KEICdpgMZ7LRgmTRW7TiCzwi1";
 
 // ============================================
 // DOM Elements

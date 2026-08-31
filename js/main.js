@@ -1,6 +1,6 @@
 // ============================================
-// main.js - الموقع الأساسي لمكتب المحاماة
-// يحتوي على: Firebase, Navigation, Scroll, Reveal, Toast, Data Loading, Forms
+// main.js - الموقع الأساسي لمكتب المحاماة (نسخة Premium)
+// يحتوي على: Firebase, Navigation, Scroll, Reveal, Toast, Data Loading, Forms, Counters
 // ============================================
 
 import { db } from "./firebase.js";
@@ -15,7 +15,6 @@ import {
   addDoc,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
 
 // ============================================
 // 1. Navigation (تفعيل الرابط النشط)
@@ -39,7 +38,6 @@ function initActiveNavigation() {
   });
 }
 
-
 // ============================================
 // 2. Navbar Scroll (تغيير خلفية الناف بار عند التمرير)
 // ============================================
@@ -60,9 +58,8 @@ function initNavbarScroll() {
   handleScroll();
 }
 
-
 // ============================================
-// 3. Scroll Reveal (ظهور العناصر عند التمرير)
+// 3. Scroll Reveal (ظهور العناصر عند التمرير) - محسّن
 // ============================================
 
 function initScrollReveal() {
@@ -87,16 +84,65 @@ function initScrollReveal() {
   elements.forEach((el) => observer.observe(el));
 }
 
-function addRevealClasses() {
-  document.querySelectorAll("section").forEach((section) => {
-    section.classList.add("reveal");
-  });
-  initScrollReveal();
+// ============================================
+// 4. Counter Animation (للأرقام الإحصائية)
+// ============================================
+
+function initCounters() {
+  const counters = document.querySelectorAll(".stat-number[data-count]");
+  if (!counters.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.getAttribute("data-count"), 10);
+          if (isNaN(target) || target === 0) {
+            // إذا لم تكن القيمة رقماً، نعرضها كما هي (مثل علامة ✔)
+            return;
+          }
+          animateCounter(el, target);
+          observer.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  counters.forEach((counter) => observer.observe(counter));
 }
 
+function animateCounter(element, target) {
+  const duration = 2000; // 2 seconds
+  const startTime = performance.now();
+
+  function updateCounter(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // توزيع سلس (ease-out)
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(eased * target);
+    element.textContent = current;
+
+    if (progress < 1) {
+      requestAnimationFrame(updateCounter);
+    } else {
+      element.textContent = target;
+      // إضافة تأثير وميض خفيف عند الانتهاء
+      element.style.transition = "transform 0.3s";
+      element.style.transform = "scale(1.05)";
+      setTimeout(() => {
+        element.style.transform = "scale(1)";
+      }, 300);
+    }
+  }
+
+  requestAnimationFrame(updateCounter);
+}
 
 // ============================================
-// 4. Toast (رسائل منبثقة)
+// 5. Toast (رسائل منبثقة)
 // ============================================
 
 export function showToast(message, type = "info") {
@@ -111,15 +157,14 @@ export function showToast(message, type = "info") {
 
   setTimeout(() => {
     toast.remove();
-  }, 3000);
+  }, 3500);
 }
 
-
 // ============================================
-// 5. Firebase Data Loading
+// 6. Firebase Data Loading
 // ============================================
 
-// ----- 5.1 Settings (إعدادات الموقع) -----
+// ----- 6.1 Settings (إعدادات الموقع) -----
 async function loadSettings() {
   try {
     const settingsDoc = await getDoc(doc(db, "settings", "site"));
@@ -179,12 +224,15 @@ async function loadSettings() {
     // 6. سنوات الخبرة وعدد القضايا
     const expYears = document.getElementById("experience-years");
     if (expYears && data.experienceYears) {
-      expYears.textContent = data.experienceYears;
+      // نضع القيمة كـ data-count للـ Counter
+      expYears.setAttribute("data-count", data.experienceYears);
+      expYears.textContent = "0"; // يبدأ من 0
     }
 
     const casesCount = document.getElementById("cases-count");
     if (casesCount && data.casesCount) {
-      casesCount.textContent = data.casesCount;
+      casesCount.setAttribute("data-count", data.casesCount);
+      casesCount.textContent = "0";
     }
 
     console.log("✅ تم تحميل إعدادات الموقع من Firebase.");
@@ -193,8 +241,7 @@ async function loadSettings() {
   }
 }
 
-
-// ----- 5.2 Services (الخدمات) -----
+// ----- 6.2 Services (الخدمات) -----
 async function loadServices() {
   const container = document.getElementById("services-container");
   if (!container) return;
@@ -241,7 +288,7 @@ async function loadServices() {
       const iconDiv = document.createElement("div");
       iconDiv.className = "service-icon";
       if (service.icon) {
-        iconDiv.innerHTML = service.icon; // SVG آمن لأننا نتحكم في المصدر
+        iconDiv.innerHTML = service.icon;
       } else {
         iconDiv.innerHTML = `
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -286,8 +333,7 @@ async function loadServices() {
   }
 }
 
-
-// ----- 5.3 Lawyers (المحامين) -----
+// ----- 6.3 Lawyers (المحامين) -----
 async function loadLawyers() {
   const container = document.getElementById("lawyers-container");
   if (!container) return;
@@ -376,8 +422,7 @@ async function loadLawyers() {
   }
 }
 
-
-// ----- 5.4 Articles (المقالات) -----
+// ----- 6.4 Articles (المقالات) -----
 async function loadArticles() {
   const container = document.getElementById("articles-container");
   if (!container) return;
@@ -423,7 +468,6 @@ async function loadArticles() {
       if (article.image && article.image.trim() !== "") {
         imageDiv.style.backgroundImage = `url('${article.image}')`;
       } else {
-        // إذا لم توجد صورة، نخفي العنصر أو نعطيه خلفية محايدة بدون 404
         imageDiv.style.display = "none";
       }
       card.appendChild(imageDiv);
@@ -432,7 +476,6 @@ async function loadArticles() {
       const contentDiv = document.createElement("div");
       contentDiv.className = "article-content";
 
-      // الفئة (إذا كانت موجودة)
       if (article.category && article.category.trim() !== "") {
         const categorySpan = document.createElement("span");
         categorySpan.className = "article-category";
@@ -440,23 +483,19 @@ async function loadArticles() {
         contentDiv.appendChild(categorySpan);
       }
 
-      // العنوان
       const titleElem = document.createElement("h3");
       titleElem.className = "article-title";
       titleElem.textContent = article.title;
       contentDiv.appendChild(titleElem);
 
-      // الملخص
       const excerptElem = document.createElement("p");
       excerptElem.className = "article-excerpt";
       excerptElem.textContent = article.excerpt;
       contentDiv.appendChild(excerptElem);
 
-      // الميتا (التاريخ والرابط)
       const metaDiv = document.createElement("div");
       metaDiv.className = "article-meta";
 
-      // التاريخ (إذا كان موجوداً)
       if (article.date && article.date.trim() !== "") {
         const dateSpan = document.createElement("span");
         dateSpan.className = "article-date";
@@ -464,7 +503,6 @@ async function loadArticles() {
         metaDiv.appendChild(dateSpan);
       }
 
-      // رابط "اقرأ المزيد"
       const linkElem = document.createElement("a");
       linkElem.className = "card-link";
       if (article.slug) {
@@ -491,9 +529,8 @@ async function loadArticles() {
   }
 }
 
-
 // ============================================
-// 6. Form Handling (نموذج الاتصال)
+// 7. Form Handling (نموذج الاتصال)
 // ============================================
 
 function initContactForm() {
@@ -530,16 +567,15 @@ function initContactForm() {
   });
 }
 
-
 // ============================================
-// 7. Website Initialization
+// 8. Website Initialization
 // ============================================
 
 document.addEventListener("DOMContentLoaded", () => {
   // تهيئة الوظائف الأساسية
   initActiveNavigation();
   initNavbarScroll();
-  addRevealClasses();
+  initScrollReveal();
 
   // تحميل البيانات من Firebase
   loadSettings();
@@ -549,4 +585,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // تهيئة النماذج
   initContactForm();
+
+  // تفعيل الـ Counters بعد تحميل الإعدادات (تأخير بسيط للتأكد من تحديث DOM)
+  setTimeout(() => {
+    initCounters();
+  }, 500);
 });
