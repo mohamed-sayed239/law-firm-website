@@ -973,3 +973,94 @@
     font-size: 0.95rem;
   }
 }
+/* ---------- Team ---------- */
+.team-section {
+  background: var(--color-surface);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.lawyer-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  text-align: center;
+}
+
+.lawyer-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== تعديل صورة المحامي ===== */
+.lawyer-card .lawyer-image,
+.lawyer-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3; /* تغيير من 1/1 إلى 4/3 */
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--color-border);
+  transition: transform var(--transition-slow);
+  background: var(--color-border-light);
+  max-height: 380px; /* تحديد أقصى ارتفاع للصورة */
+}
+
+.lawyer-card:hover .lawyer-image,
+.lawyer-card:hover img {
+  transform: scale(1.02);
+}
+
+/* ===== تعديل للشاشات المتوسطة ===== */
+@media (max-width: 992px) {
+  .lawyer-card .lawyer-image,
+  .lawyer-card img {
+    max-height: 320px;
+  }
+}
+
+/* ===== تعديل للشاشات الصغيرة (تابلت) ===== */
+@media (max-width: 768px) {
+  .lawyer-card .lawyer-image,
+  .lawyer-card img {
+    max-height: 280px;
+  }
+}
+
+/* ===== تعديل للشاشات الصغيرة جداً (موبايل) ===== */
+@media (max-width: 576px) {
+  .lawyer-card .lawyer-image,
+  .lawyer-card img {
+    max-height: 240px;
+    aspect-ratio: 3 / 2; /* نسبة أكثر استطالة للعرض على الموبايل */
+  }
+}
+
+.lawyer-info {
+  padding: var(--spacing-md);
+}
+
+.lawyer-info h3 {
+  font-size: 1.15rem;
+  margin-bottom: 2px;
+  color: var(--color-primary);
+}
+
+.lawyer-role {
+  color: var(--color-accent);
+  font-weight: var(--font-weight-semibold);
+  font-size: 0.85rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.lawyer-info .card-text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0;
+}
