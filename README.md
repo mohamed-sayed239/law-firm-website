@@ -46,3 +46,16 @@ The website is deployed using Firebase Hosting, with GitHub Actions configured f
 Client Project — Pro Bono
 
 Developed for a real client
+
+## Admin Dashboard
+
+The project includes a dedicated admin dashboard with separate interfaces for managing:
+
+- Legal articles
+- Consultation requests
+- Lawyers' information
+- Contact messages
+- Legal services
+- Website settings
+
+It also includes a dedicated login page.
